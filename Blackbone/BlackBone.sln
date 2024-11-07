@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BlackboneTest", "src\BlackB
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDriver", "TestDriver\TestDriver.vcxproj", "{548672B9-B8F1-464C-80BD-8167D400B92A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestSuit", "TestSuit\TestSuit.vcxproj", "{38C86BF8-69D5-4748-B623-DD118E548969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug(DLL)|Win32 = Debug(DLL)|Win32
@@ -127,6 +129,30 @@ Global
 		{548672B9-B8F1-464C-80BD-8167D400B92A}.Release|Win32.Build.0 = Release|Win32
 		{548672B9-B8F1-464C-80BD-8167D400B92A}.Release|x64.ActiveCfg = Release|x64
 		{548672B9-B8F1-464C-80BD-8167D400B92A}.Release|x64.Build.0 = Release|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(DLL)|Win32.ActiveCfg = Debug|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(DLL)|Win32.Build.0 = Debug|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(DLL)|x64.ActiveCfg = Debug|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(DLL)|x64.Build.0 = Debug|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(XP)|Win32.ActiveCfg = Debug|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(XP)|Win32.Build.0 = Debug|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(XP)|x64.ActiveCfg = Debug|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug(XP)|x64.Build.0 = Debug|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug|Win32.Build.0 = Debug|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug|x64.ActiveCfg = Debug|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Debug|x64.Build.0 = Debug|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(DLL)|Win32.ActiveCfg = Release|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(DLL)|Win32.Build.0 = Release|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(DLL)|x64.ActiveCfg = Release|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(DLL)|x64.Build.0 = Release|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(XP)|Win32.ActiveCfg = Release|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(XP)|Win32.Build.0 = Release|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(XP)|x64.ActiveCfg = Release|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release(XP)|x64.Build.0 = Release|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release|Win32.ActiveCfg = Release|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release|Win32.Build.0 = Release|Win32
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release|x64.ActiveCfg = Release|x64
+		{38C86BF8-69D5-4748-B623-DD118E548969}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

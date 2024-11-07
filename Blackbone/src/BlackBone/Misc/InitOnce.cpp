@@ -115,6 +115,10 @@ public:
         LOAD_IMPORT( "Wow64SuspendThread",                       hKernel32 );
         LOAD_IMPORT( "GetProcessDEPPolicy",                      hKernel32 );
         LOAD_IMPORT( "QueryFullProcessImageNameW",               hKernel32 );
+
+        // ydm add
+		LOAD_IMPORT("DbgPrint", hNtdll);
+
     }
 
 private:

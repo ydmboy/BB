@@ -5,7 +5,9 @@
 #include <iostream>
 #include "./BlackBone/DriverControl/DriverControl.h"
 #include "BlackBoneTest/Common.h"
-
+#include <BlackBone/Misc/DynImport.h>
+#include <Windows.h>
+#include <BlackBone/Process/Process.h>
 
 
 
@@ -19,10 +21,153 @@ void MapCmdFromMem();
 #pragma comment(lib,"BlackBone.lib")
 
 
+
+//#define SAFE_CALL(name, ...) (DynImport::Instance().safeCall<fn ## name>( #name, __VA_ARGS__ ))
+
+
+//
+//ULONG DbgPrint(
+//    PCSTR Format,
+//    ...
+//);
+
+
+
+void PrintHandleInfo(const HandleInfo& handleInfo)
+{
+    std::wcout << L"Handle: " << handleInfo.handle << std::endl;
+    std::wcout << L"Access: " << handleInfo.access << std::endl;
+    std::wcout << L"Flags: " << handleInfo.flags << std::endl;
+    std::wcout << L"Object Pointer: " << handleInfo.pObject << std::endl;
+    std::wcout << L"Type Name: " << handleInfo.typeName << std::endl;
+    std::wcout << L"Name: " << handleInfo.name << std::endl;
+
+    if (handleInfo.section) {
+        // 假设 SectionInfo 中有字段用于打印
+        std::wcout << L"Section Info: ..." << std::endl;
+    }
+    std::wcout << L"-----------------------" << std::endl;
+}
+
+
 int main( int /*argc*/, char* /*argv[]*/ )
 {
-    DriverControl& DrvCtrl = DriverControl::Instance();
-    DrvCtrl.Reload();
+
+
+    call_result_t<std::vector<ProcessInfo>> rt_vectorProcess =Process::EnumByNameOrPID(NULL,L"",NULL);
+    if(rt_vectorProcess.success())
+    {
+        std::vector<ProcessInfo> vectorProcess = rt_vectorProcess.result();
+	    for( const auto proc : vectorProcess)
+	    {
+            std::wcout << proc.pid << "\t" << proc.imageName  << std::endl;
+	    }
+    }
+
+    //HMODULE hNtdll = GetModuleHandleW(L"ntdll.dll");
+    //HMODULE hKernel32 = GetModuleHandleW(L"kernel32.dll");
+
+
+    //LOAD_IMPORT("DbgPrint", hNtdll);
+
+    Process pr;
+    pr.Attach(L"CalculatorApp.exe");
+    std::vector<DWORD> myVector = pr.EnumByName(L"CalculatorApp.exe");
+    for(DWORD value : myVector)
+    {
+        std::cout << value << std::endl;
+    }
+
+    call_result_t<std::vector<HandleInfo>> vectorHandleInfo = pr.EnumHandles();
+
+    if(vectorHandleInfo.success())
+    {
+        const std::vector<HandleInfo>& handles = vectorHandleInfo.result();
+        for(const auto& handleInfo : handles)
+        {
+            PrintHandleInfo(handleInfo);
+        }
+    }
+
+
+
+    return 1;
+
+    std::vector<ModuleDataPtr> vcModule;
+    //NativeWow64 nt(pr.EnumByName());
+    //vcModule = nt.EnumModules(LdrList);
+
+    return 1;
+
+    for (const auto& mod : vcModule) {
+        // 打印模块的名称、基地址、大小、入口点等信息
+        std::wcout << L"Module Name: " << mod->name << std::endl;
+        std::wcout << L"Base Address: " << std::hex << mod->baseAddress << std::endl;
+        std::wcout << L"Size: " << std::dec << mod->size << L" bytes" << std::endl;
+        std::wcout << L"Path: " << mod->fullPath << std::endl;
+
+        // 如果这是 NtLdrEntry 类型，打印额外的信息
+        //auto ntLdrEntry = std::dynamic_pointer_cast<const blackbone::NtLdrEntry>(mod);
+        //if (ntLdrEntry) {
+        //    std::wcout << L"Entry Point: " << std::hex << ntLdrEntry->entryPoint << std::endl;
+        //    std::wcout << L"Hash: " << std::hex << ntLdrEntry->hash << std::endl;
+        //    std::wcout << L"SafeSEH: " << (ntLdrEntry->safeSEH ? L"true" : L"false") << std::endl;
+        //}
+
+        std::wcout << L"----------------------------------" << std::endl;
+    }
+
+
+    UNICODE_STRING ustr = { 0 };
+    wchar_t x[] = L"View++_Driver64.sys";
+    wchar_t dirName[] = L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\";
+
+	wchar_t fullPath[256];
+
+    wcscpy_s(fullPath, dirName);
+    wcscpy_s(fullPath, x);
+
+    SAFE_CALL(RtlInitUnicodeString, &ustr, fullPath);
+    if(NT_SUCCESS(SAFE_CALL(NtUnloadDriver, &ustr)))
+    {
+	    printf("NtUnloadDriver:%ws",x);
+    }else
+    {
+	    printf("NtUnloadDriver_UNSUCCESS:%ws",x);
+    }
+
+    //SAFE_CALL(DbgPrint, "DbgPrintf_UNICODE_STRING:%wZ", ustr);
+
+    
+    //SAFE_CALL(RtlFreeUnicodeString, &ustr);
+    //printf("%ws",ustr.Buffer);
+
+
+    //printf("int main\n");
+    //SAFE_CALL(MessageBoxA,_T("asd"));
+
+
+    //typedef int (FAR WINAPI* FARPROC)();
+
+
+ //   FARPROC fn = nullptr;
+	//DynImport& dynImport = DynImport::Instance();
+
+	//if((fn=dynImport.load("Sleep",L"kernel32.dll"))!=nullptr)
+	//{
+ //       fn();
+	//	std::cout << "Successfully loaded Sleep function" << std::endl;
+	//}else
+	//{
+	//	std::cerr << "Failed to load Sleep function" << std::endl;
+	//	return -1;
+	//}
+
+    //DriverControl& DrvCtrl = DriverControl::Instance();
+    //DrvCtrl.Reload();
+    //DrvCtrl.Unload();
+	
+
 
 
     return 0;
