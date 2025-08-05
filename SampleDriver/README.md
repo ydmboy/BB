@@ -20,8 +20,21 @@ sc create HelloDriver type= kernel binPath= C:\\Path\\To\\HelloDriver.sys
 sc start HelloDriver
 ```
 
+To verify the driver loaded, use Sysinternals DebugView or attach WinDbg and check the debug output for:
+
+```
+[SampleDriver] Loaded.
+```
+
 Unload the driver with:
+
 ```
 sc stop HelloDriver
 sc delete HelloDriver
+```
+
+Similarly, confirm the driver unloads by observing the debug output for:
+
+```
+[SampleDriver] Unloading.
 ```
