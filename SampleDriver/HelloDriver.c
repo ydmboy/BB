@@ -14,3 +14,4 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT DriverObject, _In_ PUNICODE_STRING Regi
     DriverObject->DriverUnload = DriverUnload;
     return STATUS_SUCCESS;
 }
+

@@ -1,0 +1,19 @@
+; Sample INF for HelloDriver
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171}
+Provider=%Manufacturer%
+DriverVer=11/07/2024,1.0.0.0
+
+[DefaultInstall]
+CopyFiles=DriverCopy
+
+[DestinationDirs]
+DriverCopy=12
+
+[DriverCopy]
+HelloDriver.sys
+
+[Strings]
+Manufacturer="Sample Manufacturer"
